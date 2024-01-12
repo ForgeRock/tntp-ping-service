@@ -28,6 +28,29 @@ import org.forgerock.openam.annotations.sm.Config;
 public interface testService {
 
     @Attribute(order = 1)
-    default String tenantName(){ return ""; };
+    default String environmentId(){ return ""; };
+
+    @Attribute(order = 200)
+    default String region(){ return ""; };
+
+    @Attribute(order = 300)
+    default String apiKey(){ return ""; };
+
+    @Attribute(order = 400)
+    default String clientId(){ return ""; };
+
+    @Attribute(order = 500)
+    default String clientSecret(){ return ""; };
+
+    @Attribute(order = 600)
+    default String redirectURL(){ return ""; };
+
+    @Attribute(order = 700)
+    default String clientIdWorkerApp(){ return ""; };
+
+    @Attribute(order = 800)
+    default String clientIdWorkerSecret(){ return ""; };
+
+
 
 }
