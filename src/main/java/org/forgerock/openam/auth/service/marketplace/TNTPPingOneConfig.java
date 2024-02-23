@@ -14,7 +14,7 @@ public interface TNTPPingOneConfig extends ServiceComponentConfig{
     default String environmentId(){ return ""; };    
     
     @Attribute(order = 200)
-    default String environmentRegion(){ return ""; };
+    PingOneRegion environmentRegion();
 
     @Attribute(order = 300)
     default String p1APIKey(){ return ""; };
@@ -33,5 +33,30 @@ public interface TNTPPingOneConfig extends ServiceComponentConfig{
 
     @Attribute(order = 800)
     default String clientIdWorkerSecret(){ return ""; };
+    
+    
+    public enum PingOneRegion {
+        NA(".com"),
+        CA(".ca"),
+        EU(".eu"),
+        ASIA(".asia");
+
+        private final String domainSuffix;
+
+        PingOneRegion(String domainSuffix) {
+          this.domainSuffix = domainSuffix;
+        }
+
+        public String getDomainSuffix() {
+          return domainSuffix;
+        }
+      }
+    
+    
 	
 }
+
+
+
+
+
