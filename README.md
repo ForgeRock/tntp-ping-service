@@ -14,20 +14,21 @@ Select Ping One Service from the Choose a service type menu, and click Create.
 
 In the Ping One Service page, ensure that Enable is selected.
 
-Environment ID: Environment ID
+### Configuration Parameters
+* Environment ID: Environment ID
 
-Environment Region: Environment Region
+* Environment Region: Environment Region
 
-PingOne API Key: PingOne Node Client ID
+* PingOne API Key: PingOne Node Client ID
 
-PingOne API Key: PingOne Node Client Secret
+* PingOne API Key: PingOne Node Client Secret
 
-PingOne Redirect URL: PingOne Node Redirect URL
+* PingOne Redirect URL: PingOne Node Redirect URL
 
-DaVinci API Key: PingOne DaVinci API Key
+* DaVinci API Key: PingOne DaVinci API Key
 
-Client ID Worker App: Worker Application Client ID
+* Client ID Worker App: Worker Application Client ID
 
-Client ID Worker Secret: Worker Application Client Secret
+* Client ID Worker Secret: Worker Application Client Secret
 
 Click Save Changes.
