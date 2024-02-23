@@ -1,6 +1,8 @@
+# Ping One Service
+
 You must set up the Ping One service in your Identity Cloud tenant before using the Ping nodes in an authentication journey.
 
-# To configure the Ping One service:
+## To configure the Ping One service:
 
 Log in to your Identity Cloud admin UI, and navigate to Native Consoles > Access Management.
 
