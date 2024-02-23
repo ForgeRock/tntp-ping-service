@@ -35,6 +35,6 @@ In the Ping One Service page, ensure that Enable is selected.
 
 * Client ID Worker Secret: Worker Application Client Secret
 
-![ScreenShot](./images/PingOne%20Service%20Configuration.png)
+![ScreenShot](./images/PingOne%20Service%20Configurations.png)
 
 Click Save Changes.
