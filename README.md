@@ -23,17 +23,17 @@ In the Ping One Service page, ensure that Enable is selected.
 
 * Environment Region: Environment Region
 
-* PingOne API Key: PingOne Node Client ID
+* PingOne Node Client ID: PingOne Node Client ID
 
-* PingOne API Key: PingOne Node Client Secret
+* PingOne Node Client Secret: PingOne Node Client Secret
 
-* PingOne Redirect URL: PingOne Node Redirect URL
+* PingOne Node Redirect URL: PingOne Node Redirect URL
 
-* DaVinci API Key: PingOne DaVinci API Key
+* PingOne DaVinci API Key: PingOne DaVinci API Key
 
-* Client ID Worker App: Worker Application Client ID
+* Worker Application Client ID: Worker Application Client ID
 
-* Client ID Worker Secret: Worker Application Client Secret
+* Worker Application Client Secret: Worker Application Client Secret
 
 ![ScreenShot](./images/PingOne%20Service%20Configurations.png)
 
