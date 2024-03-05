@@ -56,7 +56,7 @@ import org.forgerock.openam.plugins.StartupType;
  */
 public class TNTPPingOneServicePlugin extends AbstractNodeAmPlugin {
 
-	static String currentVersion = "0.0.8"; 
+	static String currentVersion = "0.0.19"; 
 	static final String logAppender = "[Version: " + currentVersion + "][Marketplace] ";
 	
     /** 
@@ -80,7 +80,7 @@ public class TNTPPingOneServicePlugin extends AbstractNodeAmPlugin {
 	@Override
 	public void onInstall() throws PluginException {
 		pluginTools.installService(TNTPPingOneService.class);
-		super.onInstall();
+		//super.onInstall();
 	}
 
     /** 
@@ -94,7 +94,7 @@ public class TNTPPingOneServicePlugin extends AbstractNodeAmPlugin {
 	@Override
 	public void onStartup(StartupType startupType) throws PluginException {
 		pluginTools.startService(TNTPPingOneService.class);
-		super.onStartup(startupType);
+		//super.onStartup(startupType);
 	}
 
     /** 
@@ -112,7 +112,7 @@ public class TNTPPingOneServicePlugin extends AbstractNodeAmPlugin {
 		} catch (Exception e) {
 			throw new PluginException(e.getMessage());
 		}
-		super.upgrade(fromVersion);
+		//super.upgrade(fromVersion);
 	}
 
     /** 

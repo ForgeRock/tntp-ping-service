@@ -73,7 +73,7 @@ public class TNTPPingOneConfigChoiceValues extends ChoiceValues {
 				igCommService = serviceRegistry
 						.getRealmSingleton(TNTPPingOneService.class, getRealm(tntpPingOneConfigName)).get();
 			}
-			return igCommService.commConfigs().get(getId(tntpPingOneConfigName));
+			return igCommService.PingOneService().get(getId(tntpPingOneConfigName));
 		} catch (SSOException | SMSException | RealmLookupException e) {
 			logger.error(loggerPrefix + "Couldn't load igComm configs", e);
 			throw new IllegalStateException(loggerPrefix + "Couldn't load PingOne Service configs", e);
@@ -111,7 +111,7 @@ public class TNTPPingOneConfigChoiceValues extends ChoiceValues {
 			Map<String, String> configs = new TreeMap<String, String>();
 			TNTPPingOneService globalIGCommService = serviceRegistry
 					.getGlobalSingleton(TNTPPingOneService.class);
-			Iterator<String> globalConfigIterator = globalIGCommService.commConfigs().idSet().iterator();
+			Iterator<String> globalConfigIterator = globalIGCommService.PingOneService().idSet().iterator();
 			while (globalConfigIterator.hasNext()) {
 				String id = globalConfigIterator.next();
 				configs.put(TNTPPingOneConfigChoiceValues.createTNTPPingOneConfigName(id), "");
@@ -119,7 +119,7 @@ public class TNTPPingOneConfigChoiceValues extends ChoiceValues {
 			if (serviceRegistry.getRealmSingleton(TNTPPingOneService.class, Realms.of(realm)).isPresent()) {
 				TNTPPingOneService realmIGCommService = serviceRegistry
 						.getRealmSingleton(TNTPPingOneService.class, Realms.of(realm)).get();
-				Iterator<String> realmConfigIterator = realmIGCommService.commConfigs().idSet().iterator();
+				Iterator<String> realmConfigIterator = realmIGCommService.PingOneService().idSet().iterator();
 				while (realmConfigIterator.hasNext()) {
 					String id = realmConfigIterator.next();
 					configs.put(TNTPPingOneConfigChoiceValues.createTNTPPingOneConfigName(id, Realms.of(realm)), "");

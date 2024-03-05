@@ -1,10 +1,12 @@
 package org.forgerock.openam.auth.service.marketplace;
 
+import org.forgerock.am.config.RealmConfiguration;
 import org.forgerock.am.config.ServiceComponentConfig;
 import org.forgerock.openam.annotations.sm.Attribute;
+import org.forgerock.openam.annotations.sm.Config;
 import org.forgerock.openam.annotations.sm.Id;
 
-public interface TNTPPingOneConfig extends ServiceComponentConfig{
+public interface TNTPPingOneConfig extends ServiceComponentConfig,  RealmConfiguration<TNTPPingOneConfig.Realm> {
 	
 	
 	@Id
@@ -51,8 +53,27 @@ public interface TNTPPingOneConfig extends ServiceComponentConfig{
           return domainSuffix;
         }
       }
+  
     
     
+    /**
+     * The Realm.
+     */
+    @Config(scope = Config.Scope.REALM_AND_GLOBAL)
+    
+    interface Realm {
+
+        /**
+         * Whether this specific service config is enabled.
+         *
+         * @return true if it's enabled
+         */
+        @Attribute(order = 100, requiredValue = true)
+        default boolean enabled() {
+            return true;
+        }
+
+    }
 	
 }
 

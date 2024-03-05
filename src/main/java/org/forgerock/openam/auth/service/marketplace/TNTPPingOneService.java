@@ -33,7 +33,7 @@ public interface TNTPPingOneService {
 
 
 	@SubConfig
-	Multiple<TNTPPingOneConfig> commConfigs();
+	Multiple<TNTPPingOneConfig> PingOneService();
 
     @Attribute(order = 90, validators = {RequiredValueValidator.class})
     default boolean enable() { return true; }

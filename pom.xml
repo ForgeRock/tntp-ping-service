@@ -23,7 +23,7 @@
     <artifactId>TNTPPingOneService</artifactId>
 
     <groupId>org.forgerock.openam.auth.service.marketplace</groupId>
-    <version>0.0.8</version>    
+    <version>0.0.19</version>    
     <name>PingOne Services</name>
     <description>Service for PingOne, PingOne DaVinci API, PingOne Protect *, and PingOne Verify</description>
 
@@ -74,6 +74,10 @@
             <groupId>org.forgerock.am</groupId>
             <artifactId>openam-guice-core</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.forgerock.am</groupId>
+            <artifactId>openam-oauth2</artifactId>
         </dependency>
         <dependency>
             <groupId>org.forgerock.am</groupId>
