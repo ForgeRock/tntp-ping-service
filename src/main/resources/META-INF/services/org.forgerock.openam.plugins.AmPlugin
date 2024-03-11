@@ -14,4 +14,4 @@
 # Copyright 2017-2018 ForgeRock AS.
 #
 
-com.example.testServiceNode.testServiceNodePlugin
+org.forgerock.openam.auth.service.marketplace.TNTPPingOneServicePlugin

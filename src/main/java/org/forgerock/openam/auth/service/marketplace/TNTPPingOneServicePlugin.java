@@ -1,20 +1,12 @@
 /*
- * The contents of this file are subject to the terms of the Common Development and
- * Distribution License (the License). You may not use this file except in compliance with the
- * License.
+ * This code is to be used exclusively in connection with Ping Identity Corporation software or services. 
+ * Ping Identity Corporation only offers such software or services to legal entities who have entered into 
+ * a binding license agreement with Ping Identity Corporation.
  *
- * You can obtain a copy of the License at legal/CDDLv1.0.txt. See the License for the
- * specific language governing permission and limitations under the License.
- *
- * When distributing Covered Software, include this CDDL Header Notice in each file and include
- * the License file at legal/CDDLv1.0.txt. If applicable, add the following below the CDDL
- * Header, with the fields enclosed by brackets [] replaced by your own identifying
- * information: "Portions copyright [year] [name of copyright owner]".
- *
- * Copyright 2017-2023 ForgeRock AS.
+ * Copyright 2024 Ping Identity Corporation. All Rights Reserved
  */
 
-package com.example.testServiceNode;
+package org.forgerock.openam.auth.service.marketplace;
 
 import java.util.Collections;
 import java.util.Map;
@@ -22,6 +14,7 @@ import java.util.Map;
 import org.forgerock.openam.auth.node.api.AbstractNodeAmPlugin;
 import org.forgerock.openam.auth.node.api.Node;
 import org.forgerock.openam.plugins.PluginException;
+import org.forgerock.openam.plugins.StartupType;
 
 /**
  * Definition of an <a href="https://backstage.forgerock.com/docs/am/6/apidocs/org/forgerock/openam/auth/node/api/AbstractNodeAmPlugin.html">AbstractNodeAmPlugin</a>. 
@@ -53,9 +46,10 @@ import org.forgerock.openam.plugins.PluginException;
  * </p>
  * @since AM 5.5.0
  */
-public class testServiceNodePlugin extends AbstractNodeAmPlugin {
+public class TNTPPingOneServicePlugin extends AbstractNodeAmPlugin {
 
-	static private String currentVersion = "1.0.3";
+	static String currentVersion = "0.0.20"; 
+	static final String logAppender = "[Version: " + currentVersion + "][Marketplace] ";
 	
     /** 
      * Specify the Map of list of node classes that the plugin is providing. These will then be installed and
@@ -65,8 +59,7 @@ public class testServiceNodePlugin extends AbstractNodeAmPlugin {
      */
 	@Override
 	protected Map<String, Iterable<? extends Class<? extends Node>>> getNodesByVersion() {
-		return Collections.singletonMap(testServiceNodePlugin.currentVersion,
-				null);
+		return Collections.emptyMap();
 	}
 
     /** 
@@ -77,7 +70,7 @@ public class testServiceNodePlugin extends AbstractNodeAmPlugin {
      */
 	@Override
 	public void onInstall() throws PluginException {
-		pluginTools.installService(testService.class);
+		pluginTools.installService(TNTPPingOneService.class);
 		super.onInstall();
 	}
 
@@ -90,9 +83,9 @@ public class testServiceNodePlugin extends AbstractNodeAmPlugin {
      * @param startupType The type of startup that is taking place.
      */
 	@Override
-	public void onStartup() throws PluginException {
-		pluginTools.startService(testService.class);
-		super.onStartup();
+	public void onStartup(StartupType startupType) throws PluginException {
+		pluginTools.startService(TNTPPingOneService.class);
+		super.onStartup(startupType);
 	}
 
     /** 
@@ -106,7 +99,7 @@ public class testServiceNodePlugin extends AbstractNodeAmPlugin {
 	@Override
 	public void upgrade(String fromVersion) throws PluginException {
 		try {
-			pluginTools.upgradeIdRepo(testService.class);
+			pluginTools.upgradeIdRepo(TNTPPingOneService.class);
 		} catch (Exception e) {
 			throw new PluginException(e.getMessage());
 		}
@@ -121,6 +114,6 @@ public class testServiceNodePlugin extends AbstractNodeAmPlugin {
      */
 	@Override
 	public String getPluginVersion() {
-		return testServiceNodePlugin.currentVersion;
+		return TNTPPingOneServicePlugin.currentVersion;
 	}
 }
