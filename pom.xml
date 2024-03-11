@@ -43,15 +43,7 @@
                 <extensions>true</extensions>
             </plugin>
         </plugins>
-    </build>
-    
-    <distributionManagement>
-        <repository>
-            <id>forgerock-internal-releases</id>
-            <name>ForgeRock Internal Release Repository</name>
-            <url>https://maven.forgerock.org/repo/internal-releases</url>
-        </repository>
-    </distributionManagement>    
+    </build>  
 
     <dependencyManagement>
         <dependencies>
