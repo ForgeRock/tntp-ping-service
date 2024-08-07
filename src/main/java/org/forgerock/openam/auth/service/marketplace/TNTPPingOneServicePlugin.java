@@ -48,7 +48,7 @@ import org.forgerock.openam.plugins.StartupType;
  */
 public class TNTPPingOneServicePlugin extends AbstractNodeAmPlugin {
 
-	static String currentVersion = "0.0.20"; 
+	static String currentVersion = "0.0.21"; 
 	static final String logAppender = "[Version: " + currentVersion + "][Marketplace] ";
 	
     /** 
