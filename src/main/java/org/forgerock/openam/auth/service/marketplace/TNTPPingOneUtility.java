@@ -76,7 +76,7 @@ public class TNTPPingOneUtility {
 		try {
 			WorkerKey key = new WorkerKey(realm, worker);
 			String token = accessTokenCache.get(key);
-			if (StringUtils.isBlank(token)) {
+			if (!StringUtils.isBlank(token)) {
 				return token;
 			} else {
 				accessTokenCache.invalidate(key);
