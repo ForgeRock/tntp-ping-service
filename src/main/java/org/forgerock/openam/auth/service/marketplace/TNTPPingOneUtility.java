@@ -11,6 +11,7 @@ package org.forgerock.openam.auth.service.marketplace;
 import java.net.URI;
 import java.util.Objects;
 
+import org.apache.commons.lang.StringUtils;
 import org.forgerock.http.handler.HttpClientHandler;
 import org.forgerock.http.header.AuthorizationHeader;
 import org.forgerock.http.header.authorization.BasicCredentials;
@@ -35,7 +36,7 @@ public class TNTPPingOneUtility {
 
 	private static TNTPPingOneUtility single_instance = null;
 	private String endpoint = "https://auth.pingone";
-	private final LoadingCache<WorkerKey, AccessToken> accessTokenCache;
+	private final LoadingCache<WorkerKey, String> accessTokenCache;
 
 	// Constructor
 	// Here we will be creating private constructor
@@ -43,7 +44,7 @@ public class TNTPPingOneUtility {
 	private TNTPPingOneUtility() {
 		this.accessTokenCache = CacheBuilder.newBuilder().build(new CacheLoader<>() {
 			@Override
-			public AccessToken load(WorkerKey key) throws Exception {
+			public String load(WorkerKey key) throws Exception {
 				return getToken(key.realm, key.worker);
 			}
 		});
@@ -66,12 +67,12 @@ public class TNTPPingOneUtility {
 	 * @param worker PingOne Worker Client Service
 	 * @return The PingOne Worker AccessToken
 	 */
-	public AccessToken getAccessToken(Realm realm, TNTPPingOneConfig worker) throws Exception {
+	public String getAccessToken(Realm realm, TNTPPingOneConfig worker) throws Exception {
 
 		try {
 			WorkerKey key = new WorkerKey(realm, worker);
-			AccessToken token = accessTokenCache.get(key);
-			if (!token.isExpired()) {
+			String token = accessTokenCache.get(key);
+			if (StringUtils.isBlank(token)) {
 				return token;
 			} else {
 				accessTokenCache.invalidate(key);
@@ -83,7 +84,7 @@ public class TNTPPingOneUtility {
 		}
 	}
 
-	private AccessToken getToken(Realm realm, TNTPPingOneConfig worker) throws Exception {
+	private String getToken(Realm realm, TNTPPingOneConfig worker) throws Exception {
 		HttpClientHandler handler = null;
 		Request request = null;
 
@@ -104,8 +105,7 @@ public class TNTPPingOneUtility {
 			if (response.getStatus() == Status.OK) {
 				JsonValue resp = JsonValue.json(response.getEntity().getJson());
 				String accessToken = resp.get("access_token").asString();
-				Jwt jwt = new JwtReconstruction().reconstructJwt(accessToken, Jwt.class);
-				return new StatelessAccessToken(jwt, accessToken, worker.clientIdWorkerApp());
+				return accessToken;
 
 			} else {
 				throw new Exception("Failed to retrieve Worker Access Token." + response.getStatus() + "-" + response.getEntity().getString());
