@@ -9,6 +9,8 @@
 package org.forgerock.openam.auth.service.marketplace;
 
 import java.net.URI;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 import org.apache.commons.lang.StringUtils;
@@ -42,7 +44,9 @@ public class TNTPPingOneUtility {
 	// Here we will be creating private constructor
 	// restricted to this class itself
 	private TNTPPingOneUtility() {
-		this.accessTokenCache = CacheBuilder.newBuilder().build(new CacheLoader<>() {
+		// Set the cache expiry to match the 3600 seconds PingOne Worker access token expiry
+		this.accessTokenCache = CacheBuilder.newBuilder().expireAfterWrite(Duration.of(3599, ChronoUnit.SECONDS))
+		                                    .build(new CacheLoader<>() {
 			@Override
 			public String load(WorkerKey key) throws Exception {
 				return getToken(key.realm, key.worker);
