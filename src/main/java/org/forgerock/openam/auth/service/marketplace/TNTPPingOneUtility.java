@@ -1,6 +1,6 @@
 /*
- * This code is to be used exclusively in connection with Ping Identity Corporation software or services. 
- * Ping Identity Corporation only offers such software or services to legal entities who have entered into 
+ * This code is to be used exclusively in connection with Ping Identity Corporation software or services.
+ * Ping Identity Corporation only offers such software or services to legal entities who have entered into
  * a binding license agreement with Ping Identity Corporation.
  *
  * Copyright 2024 Ping Identity Corporation. All Rights Reserved
@@ -11,6 +11,7 @@ package org.forgerock.openam.auth.service.marketplace;
 import java.net.URI;
 import java.util.Objects;
 
+import org.forgerock.guice.core.InjectorHolder;
 import org.forgerock.http.handler.HttpClientHandler;
 import org.forgerock.http.header.AuthorizationHeader;
 import org.forgerock.http.header.authorization.BasicCredentials;
@@ -22,6 +23,7 @@ import org.forgerock.json.JsonValue;
 import org.forgerock.json.jose.common.JwtReconstruction;
 import org.forgerock.json.jose.jwt.Jwt;
 import org.forgerock.oauth2.core.AccessToken;
+import org.forgerock.oauth2.core.OAuth2ProviderSettings;
 import org.forgerock.openam.core.realms.Realm;
 import org.forgerock.openam.http.HttpConstants;
 import org.forgerock.openam.oauth2.token.stateless.StatelessAccessToken;
@@ -89,7 +91,7 @@ public class TNTPPingOneUtility {
 
 		try {
 
-			handler = new HttpClientHandler();			
+			handler = new HttpClientHandler();
 			URI uri = URI.create(endpoint + worker.environmentRegion().getDomainSuffix() + "/" + worker.environmentId() + "/as/token");
 			request = new Request().setUri(uri).setMethod(HttpConstants.Methods.POST);
 			Form form = new Form();
@@ -105,7 +107,8 @@ public class TNTPPingOneUtility {
 				JsonValue resp = JsonValue.json(response.getEntity().getJson());
 				String accessToken = resp.get("access_token").asString();
 				Jwt jwt = new JwtReconstruction().reconstructJwt(accessToken, Jwt.class);
-				return new StatelessAccessToken(jwt, accessToken, worker.clientIdWorkerApp());
+				OAuth2ProviderSettings settings = InjectorHolder.getInstance(OAuth2ProviderSettings.class);
+				return new StatelessAccessToken(jwt, accessToken, worker.clientIdWorkerApp(), settings);
 
 			} else {
 				throw new Exception("Failed to retrieve Worker Access Token." + response.getStatus() + "-" + response.getEntity().getString());
