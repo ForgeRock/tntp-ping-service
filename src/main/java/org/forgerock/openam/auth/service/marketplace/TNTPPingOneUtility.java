@@ -13,7 +13,7 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.forgerock.http.handler.HttpClientHandler;
 import org.forgerock.http.header.AuthorizationHeader;
 import org.forgerock.http.header.authorization.BasicCredentials;
